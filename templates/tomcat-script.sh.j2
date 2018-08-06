@@ -8,7 +8,6 @@
 # Source function library.
 # /etc/init.d/functions
 
-export JAVA_HOME="{{ tomcat_java_home }}"
 export CATALINA_PID={{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/temp/tomcat.pid
 export CATALINA_BASE="{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
 export CATALINA_HOME="{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
@@ -29,7 +28,7 @@ start() {
         echo "Tomcat is already running (pid: $pid)"
      else
         echo "Starting Tomcat"
-        /bin/su $TOMCAT_USER $CATALINA_HOME/bin/startup.sh
+        $CATALINA_HOME/bin/startup.sh
    fi
    
    return 0
@@ -41,7 +40,7 @@ stop() {
   then
 
   echo "Stoping Tomcat"  
-   /bin/su $TOMCAT_USER $CATALINA_HOME/bin/shutdown.sh  
+  $CATALINA_HOME/bin/shutdown.sh  
 
    echo -n "Waiting for processes to exit ["
    let kwait=$SHUTDOWN_WAIT

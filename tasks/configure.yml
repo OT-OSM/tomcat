@@ -41,8 +41,8 @@
 
 - name: Configure service file {{ tomcat_service_name }} for ubuntu 14 and rhel 6 
   template:
-    src: tomcat-script.sh.j2
-    dest: /etc/init.d/{{ tomcat_service_name }}.sh
+    src: tomcat-script.j2
+    dest: /etc/init.d/{{ tomcat_service_name }}
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     mode: '0755'

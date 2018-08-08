@@ -5,12 +5,14 @@
   shell: java -version 2>&1 | grep version | awk '{print $3}' | awk -F"_" '{print $1}'| sed 's/"//g'
   register: java_version
 
+- name: Print message if correct version of java is not installed
+  fail:
+    msg: "java version is not compatible with {{ tomcat_version }}"
+  when: (java_version.stdout < "1.6" and tomcat_version.split('.')[0] == "7") or
+        (java_version.stdout < "1.7" and tomcat_version.split('.')[0] == "8")
+
 - name: Install tomcat
   include: install.yml
-  when: (java_version.stdout >= "1.6" and tomcat_version.split('.')[0] == "7") or
-        (java_version.stdout >= "1.7" and tomcat_version.split('.')[0] == "8")
-
+  
 - name: Configure tomcat
-  include: configure.yml  
-  when: (java_version.stdout >= "1.6" and tomcat_version.split('.')[0] == "7") or
-        (java_version.stdout >= "1.7" and tomcat_version.split('.')[0] == "8")
+  include: configure.yml

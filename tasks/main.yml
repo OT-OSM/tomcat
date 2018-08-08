@@ -1,10 +1,16 @@
 ---
 # tasks file for tomcat-ansible-role
 
+- name: check Java version
+  shell: java -version 2>&1 | grep version | awk '{print $3}' | awk -F"_" '{print $1}'| sed 's/"//g'
+  register: java_version
+
 - name: Install tomcat
   include: install.yml
-  when: tomcat_state == "present"
+  when: (tomcat_state == "present" and java_version.stdout >= "1.6" and tomcat_version.split('.')[0] == "7") or
+        (tomcat_state == "present" and java_version.stdout >= "1.7" and tomcat_version.split('.')[0] == "8")
 
 - name: Configure tomcat
-  include: configure.yml
-  when: tomcat_state == "present"
+  include: configure.yml  
+  when: (tomcat_state == "present" and java_version.stdout >= "1.6" and tomcat_version.split('.')[0] == "7") or
+        (tomcat_state == "present" and java_version.stdout >= "1.7" and tomcat_version.split('.')[0] == "8")

@@ -7,28 +7,10 @@
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
   notify: restart tomcat
 
-- name: Set fact of user roles to be enabled
-  set_fact:
-    tomcat_user_roles: "{{ (tomcat_user_roles + item.roles.split(',')|list)|unique }}"
-  with_items:
-    - "{{ tomcat_users }}"
-
 - name: Setup tomcat-users.xml
   template:
     src: "tomcat-users-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/tomcat-users.xml"
-  notify: restart tomcat
-
-- name: Configure access to Manager app (from localhost only or from anywhere)
-  template:
-    src: manager-context.xml.j2
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/manager/META-INF/context.xml"
-  notify: restart tomcat
-
-- name: Configure access to Host Manager (from localhost only or from anywhere)
-  template:
-    src: host-manager-context.xml.j2
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager/META-INF/context.xml"
   notify: restart tomcat
 
 - name: Configure service file {{ tomcat_service_name }}.service fir ubuntu 16 , rhel 7 and amazon linux
@@ -50,8 +32,3 @@
         (ansible_distribution == "Redhat" and ansible_distribution_major_version == "6")
   notify: restart tomcat
 
-- name: Enable tomcat service on startup
-  service:
-    name: "{{ tomcat_service_name}}"
-    enabled: yes
-    state: restarted

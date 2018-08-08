@@ -1,15 +1,7 @@
 ---
 # defaults file for tomcat
-tomcat_state: present
 
 tomcat_major_version: "{{ tomcat_version.split('.')[0].tomcat_version.split('.')[1] }}"
-
-tomcat_install_java: True
-tomcat_java_version: 1.8
-tomcat_java_home: /usr/lib/jvm/jre
-
-tomcat_java_packages_EL:
- - {package: "java-{{ tomcat_java_version }}.0-openjdk"}
 
 tomcat_downloadURL: https://archive.apache.org/dist
 
@@ -21,12 +13,7 @@ tomcat_service_name: tomcat
 tomcat_jvm_memory_percentage_xms: 15
 tomcat_jvm_memory_percentage_xmx: 55
 
-tomcat_permissions_production: False
 tomcat_webapps_auto_deployment: True
-tomcat_permissions_ensure_on_every_run: True
-
-tomcat_allow_manager_access_only_from_localhost: False
-tomcat_allow_host_manager_access_only_from_localhost: False
 
 tomcat_debug_mode: False
 
@@ -43,12 +30,3 @@ tomcat_users: []
 tomcat_user_roles: []
 
 tomcat_temp_download_path: /tmp/ansibletomcattempdir
-
-# Uninstall default parameters
-tomcat_uninstall_create_backup: True
-
-tomcat_uninstall_remove_user: True
-tomcat_uninstall_remove_group: True
-tomcat_uninstall_remove_java: False
-
-tomcat_uninstall_remove_all: False

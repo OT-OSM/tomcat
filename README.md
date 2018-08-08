@@ -1,49 +1,53 @@
-##Role Name
-  =========
+# osm_tomcat
+  ==========
 
-Tomcat Role :- it installed tomcat versions 7, 8, 8.5 and 9.
+ This role installed tomcat versions 7, 8 and 8.5. it checks for java version dependency
+```
+ Tomcat Version | Java Version
+ ------------------------------
+     7.0        | 6 or later
+     8.0        | 7 or later
+     8.5        | 7 or later
+```
 
-##Requirements
+# Supported OS  
+  ------------
+```
+Redhat 7
+Centos 7
+Ubuntu 16
+Ubuntu 14
+Amazon Linux
+```
+ 
+# Requirements
   ------------
 
 Java must be pre installed and java version must be compatible for installing tomcat version.
 
-##Role Variables
-  --------------
 
-Variable are defined in defaults/main.yml and must be verfied before executing the role.
+# Role Variables
+ --------------
 
-Ansible vault is configured for this role.
+Available variables are listed below, along with default values [vars](https://github.com/opstree-ansible/osm_tomcat/blob/master/vars/main.yml)
 
-##Example Playbook
+
+# Example Playbook
   ----------------
 ```
 - hosts: local
-  vars:
-    tomcat_version: 8.5.23
-    ansible_become: yes
-    ansible_become_pass: "{{ my_sudo_pass }}"
-    
-    
-    tomcat_users:
-      - username: "tomcat"
-        password: "t3mpp@ssw0rd"
-        roles: "tomcat,admin,manager,manager-gui"
-      - username: "exampleuser"
-        password: "us3rp@ssw0rd"
-        roles: "tomcat"        
+
   roles:
     - role: tomcat
 
 ansible-playbook tomcat.yml --ask-vault-pass --extra-vars '@passwd.yml'
 ```
 
-##License
+# License
   -------
-
 Apache
 
-##Author Information
+# Author Information
   ------------------
 
 Name :- Rohit Bansal

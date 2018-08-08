@@ -35,9 +35,3 @@
     src: "tomcat-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
   notify: restart tomcat
-
-- name: Setup tomcat-users.xml
-  template:
-    src: "tomcat-users-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/tomcat-users.xml"
-  notify: restart tomcat

@@ -1,5 +1,5 @@
 # osm_tomcat
-  ==========
+  
 
  This role installed tomcat versions 7, 8 and 8.5. it checks for java version dependency
 ```
@@ -11,7 +11,7 @@
 ```
 
 # Supported OS  
-  ------------
+
 ```
 Redhat 7
 Centos 7
@@ -21,7 +21,6 @@ Amazon Linux
 ```
  
 # Requirements
-  ------------
 
 Java must be pre installed and java version must be compatible for installing tomcat version.
 
@@ -33,22 +32,24 @@ Available variables are listed below, along with default values [vars](https://g
 
 
 # Example Playbook
-  ----------------
+  
 ```
 - hosts: local
 
   roles:
-    - role: tomcat
+    - role: osm_tomcat
 
 ansible-playbook tomcat.yml --ask-vault-pass --extra-vars '@passwd.yml'
 ```
 
 # License
-  -------
+```
 Apache
+```
 
 # Author Information
-  ------------------
-
+  
+```
 Name :- Rohit Bansal
 Email :- rohit.bansal@opstree.com
+```

@@ -47,9 +47,3 @@
     state: absent
   changed_when: False
   when: is_installed.stat.exists == False
-
-- name: Enable tomcat service on startup
-  service:
-    name: "{{ tomcat_service_name}}"
-    enabled: yes
-    state: restarted

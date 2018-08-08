@@ -1,6 +1,12 @@
 ---
 # tasks file for tomcat-ansible-role
 
+- name: Create system directory for Ubuntu 16
+  file:
+    path: /usr/lib/systemd/system
+    state: directory
+  when: (ansible_distribution == "Ubuntu" and ansible_distribution_major_version == "16")
+
 - name: Configure service file {{ tomcat_service_name }}.service for ubuntu 16 , rhel 7 and amazon linux
   template:
     src: tomcat.service.j2

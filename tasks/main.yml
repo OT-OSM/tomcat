@@ -22,7 +22,6 @@
   
 - name: Configure tomcat in {{ ansible_distribution }}
   include: "{{ ansible_distribution }}.yml"
-  when: is_available.stat.exists == False
 
 
 

@@ -9,10 +9,21 @@
   fail:
     msg: "java version is not compatible with {{ tomcat_version }}"
   when: (java_version.stdout < "1.6" and tomcat_version.split('.')[0] == "7") or
-        (java_version.stdout < "1.7" and tomcat_version.split('.')[0] == "8")
+         (java_version.stdout < "1.7" and tomcat_version.split('.')[0] == "8")
 
-- name: Install tomcat
+- name: Checking apache-tomcat-{{ tomcat_version }} directory at install path
+  stat:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+  register: is_available
+
+- name: Installing tomcat
   include: install.yml
+  when: is_available.stat.exists == False
   
-- name: Configure tomcat
-  include: configure.yml
+- name: Configure tomcat in {{ ansible_distribution }}
+  include: "{{ ansible_distribution }}.yml"
+  when: is_available.stat.exists == False
+
+
+
+

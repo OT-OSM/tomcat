@@ -1,49 +1,55 @@
 ---
-# tasks file for tomcat
+#tasks
 
-- name: Check if tomcat is already installed
-  stat:
-    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
-  register: is_installed
-
-- name: Create group {{ tomcat_group }}
-  group:
-    name: "{{ tomcat_group }}"
-    state: present
-
-- name: Create user {{ tomcat_user }}
-  user:
-    name: "{{ tomcat_user }}"
-    group: "{{ tomcat_group }}"
-    state: present
-
-- name: Create temp directory
-  file:
-    path: "{{ tomcat_temp_download_path }}"
-    state: directory
-  changed_when: False
-  when: is_installed.stat.exists == False
-
-- name: Download apache-tomcat-{{ tomcat_version }}.tar.gz
+- name: Downloading apache-tomcat-{{ tomcat_version }}.tar.gz
   get_url:
     url: "{{ tomcat_downloadURL }}/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
-    dest: "{{ tomcat_temp_download_path }}"
-  when: is_installed.stat.exists == False
+    dest: "{{ tomcat_install_path }}"
+  
 
 - name: Unarchive apache-tomcat-{{ tomcat_version }}.tar.gz at {{ tomcat_install_path }}
   unarchive:
-    src: "{{ tomcat_temp_download_path }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    src: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
     dest: "{{ tomcat_install_path }}"
     remote_src: True
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     creates: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
-  register: tomcat_installed
-  when: is_installed.stat.exists == False
 
-- name: Clean up temporary files
+- name: Create tomcat group
+  group:
+    name: "{{ tomcat_group }}"
+    state: present
+
+- name: Create tomcat user
+  user:
+    name: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    state: present
+
+- name: Removing unwanted files from apache-tomcat-{{ tomcat_version }}
   file:
-    path: '{{ tomcat_temp_download_path }}'
+    path: "{{ item }}"
     state: absent
-  changed_when: False
-  when: is_installed.stat.exists == False
+  with_items:
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/NOTICE"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/RELEASE-NOTES"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/RUNNING.txt"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/LICENSE"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/temp/safeToDelete.tmp"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/docs"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/examples"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/manager"
+    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
+- file:
+    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
+    state: directory
+
+- name: Creating a tomcat log folder in /var/log directory
+  file:
+    path: "{{ tomcat_log_path }}"
+    state: directory
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+

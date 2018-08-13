@@ -1,0 +1,48 @@
+---
+
+- name: Configure service file {{ tomcat_service_name }}.service for Ubuntu 16
+  template:
+    src: tomcat.service.j2
+    dest: /etc/systemd/system/{{ tomcat_service_name }}.service
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+  when: ansible_distribution_major_version == "16"
+
+- name: Configure service file {{ tomcat_service_name }} for Ubuntu 14
+  template:
+    src: tomcat-script.j2
+    dest: /etc/init.d/{{ tomcat_service_name }}
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+  when: ansible_distribution_major_version == "14"
+
+
+- name: Configure Environment variables for tomcat
+  template:
+    src: setenv.sh.j2
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/bin/setenv.sh"
+    owner: "{{ tomcat_user }}"
+    group: "{{ tomcat_group }}"
+    mode: '0755'
+    
+- name: Setup logging.properties  
+  template:
+    src: "logging.properties.j2"
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
+
+- name: Enable tomcat service on startup
+  service:
+    name: "{{ tomcat_service_name}}"
+    enabled: yes
+    state: restarted
+
+- name: Setup server.xml
+  template:
+    src: "tomcat-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
+    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
+  notify: restart tomcat
+
+
+  

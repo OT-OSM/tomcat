@@ -1,6 +1,18 @@
 ---
 # vars file for tomcat
 
-  tomcat_version: 8.5.23
+tomcat_version: 8.5.23
 
-  ansible_become: yes                
+ansible_become: yes
+
+tomcat_user: tomcat
+
+tomcat_group: tomcat
+
+tomcat_service_name: tomcat
+
+tomcat_port_connector: 8090
+
+tomcat_jvm_memory_percentage_xms: 15
+
+tomcat_jvm_memory_percentage_xmx: 55               

@@ -27,7 +27,7 @@ Java must be pre installed and java version must be compatible for installing to
 # Role Variables
  --------------
 
-Available variables are listed below, along with default values [vars](https://gitlab.com/oosm/osm_tomcat/blob/master/vars/main.yml)
+Available variables can be explored in [vars](https://gitlab.com/oosm/osm_tomcat/blob/master/vars/main.yml)
 
 
 # Example Playbook

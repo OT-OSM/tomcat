@@ -13,10 +13,9 @@
 # Supported OS  
 
 ```
-Redhat 7
-Centos 7
-Ubuntu 16
-Ubuntu 14
+Redhat 6/7
+Centos 6/7
+Ubuntu 14/16
 Amazon Linux
 ```
  

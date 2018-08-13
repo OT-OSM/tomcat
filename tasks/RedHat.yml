@@ -28,8 +28,14 @@
 
 - name: Setup logging.properties  
   template:
-    src: "logging.properties.j2"
+    src: "logging.properties-{{ '.'.join(tomcat_version.split('.')[:2]) }}.j2"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
+
+- name: Tomcat service daemon-reload for rhel 7
+  systemd:
+    name: "{{ tomcat_service_name}}"
+    daemon-reload: yes
+  when: ansible_distribution_major_version == "7"
 
 - name: Enable tomcat service on startup
   service:

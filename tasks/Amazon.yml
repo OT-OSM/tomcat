@@ -16,16 +16,17 @@
     group: "{{ tomcat_group }}"
     mode: '0755'
 
-- name: Enable tomcat service on startup
-  service:
-    name: "{{ tomcat_service_name}}"
-    enabled: yes
-    state: restarted
-
 - name: Setup logging.properties  
   template:
-    src: "logging.properties.j2"
+    src: "logging.properties-{{ '.'.join(tomcat_version.split('.')[:2]) }}.j2"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
+
+- name: Enable tomcat service on startup
+  systemd:
+    name: "{{ tomcat_service_name}}"
+    enabled: yes
+    daemon-reload: yes
+    state: restarted
 
 - name: Setup server.xml
   template:

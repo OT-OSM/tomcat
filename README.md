@@ -50,9 +50,8 @@ ansible-playbook tomcat.yml
 ```
 
 # License
-```
-Apache
-```
+
+`Apache`
 
 # Author Information
   

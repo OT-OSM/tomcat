@@ -1,0 +1,30 @@
+---
+# defaults file for tomcat
+
+tomcat_downloadURL: https://archive.apache.org/dist
+
+ansible_become: yes
+
+tomcat_install_path: /opt
+
+tomcat_log_path: /var/log/tomcat
+
+tomcat_service_name: tomcat
+
+tomcat_webapps_auto_deployment: True
+
+tomcat_debug_mode: False
+
+tomcat_port_shutdown: 8005
+
+tomcat_port_connector: 8090
+
+tomcat_port_redirect: 8443
+
+tomcat_port_ajp: 8009
+
+tomcat_port_debug: 8000
+
+tomcat_service_enabled_on_startup: True
+
+tomcat_temp_download_path: /tmp/ansibletomcattempdir

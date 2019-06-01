@@ -25,21 +25,21 @@
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     mode: '0755'
-    
-- name: Setup logging.properties  
+
+- name: Setup logging.properties
   template:
     src: "logging.properties-{{ '.'.join(tomcat_version.split('.')[:2]) }}.j2"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
 
 - name: Tomcat service daemon-reload for Ubuntu 16
   systemd:
-    name: "{{ tomcat_service_name}}"
-    daemon-reload: yes
+    name: "{{ tomcat_service_name }}"
+    daemon_reload: yes
   when: ansible_distribution_major_version == "16"
 
 - name: Enable tomcat service on startup
   service:
-    name: "{{ tomcat_service_name}}"
+    name: "{{ tomcat_service_name }}"
     enabled: yes
     state: restarted
 
@@ -48,6 +48,4 @@
     src: "tomcat-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
     dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
   notify: restart tomcat
-
-
-  
+...

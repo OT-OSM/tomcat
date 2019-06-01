@@ -39,7 +39,7 @@
 
 - name: Enable tomcat service on startup
   service:
-    name: "{{ tomcat_service_name}}"
+    name: "{{ tomcat_service_name }}"
     enabled: yes
     state: restarted
 

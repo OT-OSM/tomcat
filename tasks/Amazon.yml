@@ -23,7 +23,7 @@
 
 - name: Enable tomcat service on startup
   systemd:
-    name: "{{ tomcat_service_name}}"
+    name: "{{ tomcat_service_name }}"
     enabled: yes
     daemon-reload: yes
     state: restarted

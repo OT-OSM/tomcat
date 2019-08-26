@@ -42,9 +42,13 @@
     - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager"
     - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/manager"
     - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
-- file:
+  no_log: False
+
+- name: Create directory for tomcat
+  file:
     path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
     state: directory
+    
 
 - name: Creating a tomcat log folder in /var/log directory
   file:

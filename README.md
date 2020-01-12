@@ -1,14 +1,31 @@
-# osm_tomcat
-  
+Ansible Role: osm_tomcat
+=========
+An ansible role to install and configure Apache Tomcat.
 
-`This role installed tomcat versions 7, 8 and 8.5. it checks for java version dependency`
-```
- Tomcat Version | Java Version
- ------------------------------
-     7.0        | 6 or later
-     8.0        | 7 or later
-     8.5        | 7 or later
-```
+Version History
+---------------
+
+|**Date**| **Version**| **Description**| **Changed By** |
+|----------|---------|---------------|-----------------|
+|**June '15** | v.1.0 | Initial Draft | Sudipt Sharma |
+
+
+Supported OS
+------------
+  * CentOS:6/7
+  * Redhat:6/7
+  * Ubuntu:14/16
+  * Amazon Linux
+
+Dependencies
+------------
+Java must be pre installed and java version must be compatible for installing tomcat version
+
+|**Tomcat Version** | **Java Version**|
+|---------------|-------------|
+|    7.0        | 6 or later  |
+|     8.0       | 7 or later  |
+|    8.5        | 7 or later  |
 
 # Supported OS  
 

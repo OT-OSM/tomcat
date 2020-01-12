@@ -29,7 +29,7 @@ Java must be pre installed and java version must be compatible for installing to
 
 Role Variables
 --------------
-| Variables | Default Values | Description |
+| **Variables** | **Default Values** | **Description** |
 |-----------|----------------|-------------|
 | tomcat_version | 8.5.40 | Tomcat version to be installed |
 | tomcat_user | tomcat | User name by which tomcat will run |
@@ -39,22 +39,19 @@ Role Variables
 | tomcat_jvm_memory_percentage_xms | 15 | Minimum memory to tomcat process |
 | tomcat_jvm_memory_percentage_xmx | 55 | Max memory to tomcat process |
 
-
-# Role Variables
- --------------
-
-`variables defined in vars/main.yml`
-```
-* tomcat_version: Tomcat version which needs to install eg: 8.5.23
-* tomcat_user: User name by which tomcat will run
-* tomcat_group: Group name by which tomcat will be accessible
-* tomcat_service_name: Service name of tomcat
-* tomcat_port_connector: Port no. on which tomcat will be accessible
-* tomcat_jvm_memory_percentage_xms: Min memory to tomcat process
-* tomcat_jvm_memory_percentage_xmx: Max memory to tomcat process
+Inventory
+----------
+An inventory for tomcat installation should look like this:-
+```ini
+[tomcathosthost]                 
+192.168.1.198    ansible_user=ubuntu   
+192.168.3.201    ansible_user=opstree 
 ```
 
-# Example Playbook
+Example Playbook
+----------------
+
+* Here is an example playbook:-
   
 ```
 - hosts: local
@@ -64,6 +61,9 @@ Role Variables
 
 ansible-playbook tomcat.yml
 ```
+* ansible-playbook site.yml
+
+**After the successful installation of tomcat, browse through the tomcat url and you will get to see something like this**
 
 # License
 

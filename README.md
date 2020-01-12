@@ -12,9 +12,9 @@ Version History
 
 Supported OS
 ------------
-  * CentOS:6/7
-  * Redhat:6/7
-  * Ubuntu:14/16
+  * CentOS : 6/7
+  * Redhat : 6/7
+  * Ubuntu :14/16
   * Amazon Linux
 
 Dependencies
@@ -27,18 +27,17 @@ Java must be pre installed and java version must be compatible for installing to
 |     8.0       | 7 or later  |
 |    8.5        | 7 or later  |
 
-# Supported OS  
-
-```
-Redhat 6/7
-Centos 6/7
-Ubuntu 14/16
-Amazon Linux
-```
- 
-# Requirements
-
-`Java must be pre installed and java version must be compatible for installing tomcat version.`
+Role Variables
+--------------
+| Variables | Default Values | Description |
+|-----------|----------------|-------------|
+| tomcat_version | 8.5.40 | Tomcat version to be installed |
+| tomcat_user | tomcat | User name by which tomcat will run |
+| tomcat_group | tomcat | Group name by which tomcat will be accessible |
+| tomcat_service_name | tomcat | Service name of tomcat |
+| tomcat_port_connector | 8090 |  Port no. on which tomcat will be accessible |
+| tomcat_jvm_memory_percentage_xms | 15 | Minimum memory to tomcat process |
+| tomcat_jvm_memory_percentage_xmx | 55 | Max memory to tomcat process |
 
 
 # Role Variables

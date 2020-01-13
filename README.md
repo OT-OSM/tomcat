@@ -64,6 +64,7 @@ ansible-playbook tomcat.yml
 * ansible-playbook site.yml
 
 **After the successful installation of tomcat, browse through the tomcat url and you will get to see something like this**
+![home](./media/home.png)
 
 Future Proposed Changes
 -----------------------

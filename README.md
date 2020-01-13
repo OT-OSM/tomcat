@@ -65,9 +65,12 @@ ansible-playbook tomcat.yml
 
 **After the successful installation of tomcat, browse through the tomcat url and you will get to see something like this**
 
-# License
+Future Proposed Changes
+-----------------------
 
-`Apache`
+References
+----------
+- **[software](https://tomcat.apache.org/tomcat-8.5-doc/setup.html)**
 
 # Author Information
   

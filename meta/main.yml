@@ -1,13 +1,26 @@
 galaxy_info:
   author: ROHIT BANSAL
-  description: This role install tomcat version 7.0, 8.0, 8.5. Java must be installed before running this role.
+  role_name: osm_tomcat
+  description: This role install tomcat version 7.0, 8.0, 8.5.
   company: OPSTREE SOLUTIONS
 
-  license: license (GPLv2, CC-BY, etc)
-  
-  min_ansible_version: 2.0
+  license: license (GPLv2)
 
-  galaxy_tags: []
+  min_ansible_version: 2.3
 
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 6
 
-dependencies: []
+    - name: Ubuntu
+      versions:
+        - bionic
+        - xenial
+
+  galaxy_tags:
+    - tomcat
+
+dependencies:
+  - Java

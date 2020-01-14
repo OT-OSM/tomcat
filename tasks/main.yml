@@ -1,8 +1,9 @@
 ---
 # tasks file for tomcat-ansible-role
 - name: check Java version
-  shell: java -version 2>&1 | grep version | awk '{print $3}' | awk -F"_" '{print $1}'| sed 's/"//g'
+  command: java -version 2>&1 | grep version | awk '{print $3}' | awk -F"_" '{print $1}'| sed 's/"//g'
   register: java_version
+  changed_when: true
 
 - name: Print message if correct version of java is not installed
   fail:
@@ -17,11 +18,7 @@
 
 - name: Installing tomcat
   include: install.yml
-  when: is_available.stat.exists == False
+  when: not is_available.stat.exists
 
 - name: Configure tomcat in {{ ansible_distribution }}
   include: "{{ ansible_distribution }}.yml"
-
-
-
-

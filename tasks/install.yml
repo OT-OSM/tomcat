@@ -1,6 +1,5 @@
 ---
-#tasks
-
+# tasks
 - name: Downloading apache-tomcat-{{ tomcat_version }}.tar.gz
   get_url:
     url: "{{ tomcat_downloadURL }}/tomcat/tomcat-{{ tomcat_version.split('.')[0] }}/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
@@ -48,7 +47,6 @@
   file:
     path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
     state: directory
-    
 
 - name: Creating a tomcat log folder in /var/log directory
   file:

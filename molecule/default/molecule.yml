@@ -3,12 +3,10 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
-
+lint: |   
+        yamllint .
+        ansible-lint
+        flake8
 platforms:
   - name: ubuntu-16.04
     image: solita/ubuntu-systemd
@@ -40,13 +38,10 @@ platforms:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
     capabilities:
       - SYS_ADMIN
-
 provisioner:
   name: ansible
-
 verifier:
   name: testinfra
-
 scenario:
   name: default
   test_sequence:        # molecule test

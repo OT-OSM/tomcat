@@ -13,4 +13,4 @@ tomcat_port_connector: 8090
 
 tomcat_jvm_memory_percentage_xms: 15
 
-tomcat_jvm_memory_percentage_xmx: 55               
+tomcat_jvm_memory_percentage_xmx: 55

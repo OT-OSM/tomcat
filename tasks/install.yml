@@ -20,7 +20,7 @@
   unarchive:
     src: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
     dest: "{{ tomcat_install_path }}"
-    remote_src: True
+    remote_src: true
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     creates: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
@@ -41,7 +41,7 @@
     - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager"
     - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/manager"
     - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
-  no_log: False
+  no_log: false
 
 - name: Create directory for tomcat
   file:
@@ -54,4 +54,3 @@
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
-

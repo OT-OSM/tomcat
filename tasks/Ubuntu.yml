@@ -34,13 +34,13 @@
 - name: Tomcat service daemon-reload for Ubuntu 16
   systemd:
     name: "{{ tomcat_service_name }}"
-    daemon_reload: yes
+    daemon_reload: true
   when: ansible_distribution_major_version == "16"
 
 - name: Enable tomcat service on startup
   service:
     name: "{{ tomcat_service_name }}"
-    enabled: yes
+    enabled: true
     state: restarted
 
 - name: Setup server.xml

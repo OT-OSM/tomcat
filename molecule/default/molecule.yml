@@ -19,9 +19,6 @@ platforms:
       - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-  - name: ubuntu-14.04
-    image: ubuntu:14.04
-    privileged: true
   - name: centos-7
     image: solita/centos-systemd
     image_version: latest

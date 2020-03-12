@@ -5,7 +5,6 @@ driver:
   name: docker
 lint:
   name: yamllint
-  enabled: false
 platforms:
   - name: ubuntu-16.04
     image: solita/ubuntu-systemd
@@ -28,22 +27,20 @@ platforms:
     image_version: latest
     privileged: true
     security_opts:
-      - seccomp=unconfined
-    tmpfs:
-      - /tmp
-      - /run
-      - /run/lock
-    volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    capabilities:
-      - SYS_ADMIN
+      - seccomp=unconfined
+    tmpfs:
+      - /run
+      - /tmp
+      - /run/lock
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    capabilities:
+      - SYS_ADMIN
 
 provisioner:
   name: ansible
   lint:
     name: ansible-lint
-    enabled: false
-  # log: true
 verifier:
   name: testinfra
   lint:

@@ -3,7 +3,7 @@ dependency:
   name: galaxy
 driver:
   name: docker
-lint: |   
+lint: |
         yamllint .
 platforms:
   - name: ubuntu-16.04
@@ -43,15 +43,15 @@ verifier:
 scenario:
   name: default
   test_sequence:        # molecule test
-   - lint
-   - cleanup
-   - destroy
-   - dependency
-   - syntax
-   - create
-   - prepare
-   - converge
-   - side_effect
-   - verify
-   - cleanup
-   - destroy
+    - lint
+    - cleanup
+    - destroy
+    - dependency
+    - syntax
+    - create
+    - prepare
+    - converge
+    - side_effect
+    - verify
+    - cleanup
+    - destroy

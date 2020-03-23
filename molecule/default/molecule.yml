@@ -20,6 +20,15 @@ platforms:
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
 
+  - name: centos-7
+    image: solita/centos-systemd
+    image_version: latest
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    command: '/usr/sbin/init'
+    capabilities: SYS_ADMIN
+ 
 provisioner:
   name: ansible
 verifier:

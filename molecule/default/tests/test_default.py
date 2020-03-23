@@ -1,5 +1,5 @@
 import os
-import pytest
+
 import testinfra.utils.ansible_runner
 
 testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
@@ -8,6 +8,7 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
 
 def test_hosts_file(host):
     f = host.file('/opt/apache-tomcat-8.5.40/bin')
+    
     assert f.exists
     assert f.user == 'tomcat'
     assert f.group == 'tomcat'

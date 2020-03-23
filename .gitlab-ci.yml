@@ -21,7 +21,7 @@ molecule:
     - pip install docker
     - pip install ansible molecule
     - python --version
-    - pip 3 install pytest
+    - pip3 install pytest
     - ansible --version
     - molecule --version
     - molecule --debug test

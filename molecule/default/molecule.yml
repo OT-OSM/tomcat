@@ -19,6 +19,7 @@ platforms:
       - /run/lock
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
+
 provisioner:
   name: ansible
 verifier:

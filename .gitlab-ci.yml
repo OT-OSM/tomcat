@@ -1,20 +1,29 @@
 ---
-image: docker:git
+stages:
+  - test
 
-services:
-  - docker:dind
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
+
+cache:
+  paths:
+    - .pip/
+    - virtenv/
 
 before_script:
-  - apk update && apk add --no-cache docker
-    python3-dev py3-pip docker gcc git curl build-base
-    autoconf automake py3-cryptography linux-headers
-    musl-dev libffi-dev openssl-dev openssh
-  - docker info
-  - python3 --version
+  - pip3.6 install virtualenv
+  - virtualenv virtenv
+  - source virtenv/bin/activate
 
 molecule:
   stage: test
+  tags:
+    - pip36
+    - docker
   script:
-    - python3 -m pip install ansible molecule docker
+    - docker -v
+    - python -V
+    - pip install ansible molecule docker
     - ansible --version
-    - molecule test
+    - molecule --version
+    - molecule --debug test

@@ -1,29 +1,19 @@
+# -*- coding: utf-8 -*-
 ---
 stages:
-  - test
+  - yaml-lint
+  - ansible-lint
 
-variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.pip"
-
-cache:
-  paths:
-    - .pip/
-    - virtenv/
-
-before_script:
-  - pip3.6 install virtualenv
-  - virtualenv virtenv
-  - source virtenv/bin/activate
-
-molecule:
-  stage: test
-  tags:
-    - pip36
-    - docker
+yaml_lint:
+  stage: yaml-lint
+  image: opstree/docker:ansible-lint
   script:
-    - docker -v
-    - python -V
-    - pip install ansible molecule docker
-    - ansible --version
-    - molecule --version
-    - molecule --debug test
+    - yamllint ./*/*.yml
+  allow_failure: true
+
+ansible_lint:
+  stage: ansible-lint
+  image: opstree/docker:ansible-lint
+  script:
+    - ansible-lint .
+...

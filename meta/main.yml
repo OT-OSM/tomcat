@@ -1,3 +1,4 @@
+---
 galaxy_info:
   author: ROHIT BANSAL
   role_name: osm_tomcat
@@ -23,4 +24,4 @@ galaxy_info:
     - tomcat
 
 dependencies:
-  - Java
+  - java

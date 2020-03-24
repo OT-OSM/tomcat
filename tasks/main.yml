@@ -1,7 +1,7 @@
 ---
 # tasks file for tomcat-ansible-role
 - name: check Java version
-  command: java -version 2>&1 | grep version | awk '{print $3}' | awk -F"_" '{print $1}'| sed 's/"//g'
+  raw: java -version 2>&1 | grep version | awk '{print $3}' | awk -F"_" '{print $1}'| sed 's/"//g'
   register: java_version
   changed_when: true
 
@@ -11,9 +11,13 @@
   when: (java_version.stdout < "1.8" and tomcat_version.split('.')[0] == "7") or
          (java_version.stdout < "1.8" and tomcat_version.split('.')[0] == "8")
 
+- name: Set apache-tomcat directory variable
+  set_fact:
+    tomcat_direcory: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+
 - name: Checking apache-tomcat-{{ tomcat_version }} directory at install path
   stat:
-    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+    path: "{{ tomcat_direcory }}"
   register: is_available
 
 - name: Installing tomcat

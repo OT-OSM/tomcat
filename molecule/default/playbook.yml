@@ -2,5 +2,5 @@
 - name: Converge
   hosts: all
   become: true
-  roles: 
+  roles:
     - osm_tomcat

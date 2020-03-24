@@ -10,7 +10,7 @@
 - name: Configure Environment variables for tomcat
   template:
     src: setenv.sh.j2
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/bin/setenv.sh"
+    dest: "{{ tomcat_direcory }}/bin/setenv.sh"
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
     mode: '0755'
@@ -18,17 +18,17 @@
 - name: Setup logging.properties
   template:
     src: "logging.properties-{{ '.'.join(tomcat_version.split('.')[:2]) }}.j2"
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/logging.properties"
+    dest: "{{ tomcat_direcory }}/conf/logging.properties"
 
 - name: Enable tomcat service on startup
   systemd:
     name: "{{ tomcat_service_name }}"
-    enabled: yes
-    daemon-reload: yes
+    enabled: true
+    daemon-reload: true
     state: restarted
 
 - name: Setup server.xml
   template:
     src: "tomcat-server-{{ '.'.join(tomcat_version.split('.')[:2]) }}.xml.j2"
-    dest: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/conf/server.xml"
+    dest: "{{ tomcat_direcory }}/conf/server.xml"
   notify: restart tomcat

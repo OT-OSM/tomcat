@@ -16,14 +16,14 @@
     group: "{{ tomcat_group }}"
     state: present
 
-- name: Unarchive apache-tomcat-{{ tomcat_version }}.tar.gz at {{ tomcat_install_path }}
+- name: Unarchive tomcat-{{ tomcat_version }}.tar.gz at {{ tomcat_install_path }}
   unarchive:
-    src: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}.tar.gz"
+    src: "{{ tomcat_direcory }}.tar.gz"
     dest: "{{ tomcat_install_path }}"
-    remote_src: True
+    remote_src: true
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
-    creates: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}"
+    creates: "{{ tomcat_direcory }}"
 
 
 - name: Removing unwanted files from apache-tomcat-{{ tomcat_version }}
@@ -31,21 +31,21 @@
     path: "{{ item }}"
     state: absent
   with_items:
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/NOTICE"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/RELEASE-NOTES"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/RUNNING.txt"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/LICENSE"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/temp/safeToDelete.tmp"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/docs"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/examples"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/host-manager"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/manager"
-    - "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
-  no_log: False
+    - "{{ tomcat_direcory }}/NOTICE"
+    - "{{ tomcat_direcory }}/RELEASE-NOTES"
+    - "{{ tomcat_direcory }}/RUNNING.txt"
+    - "{{ tomcat_direcory }}/LICENSE"
+    - "{{ tomcat_direcory }}/temp/safeToDelete.tmp"
+    - "{{ tomcat_direcory }}/webapps/docs"
+    - "{{ tomcat_direcory }}/webapps/examples"
+    - "{{ tomcat_direcory }}/webapps/host-manager"
+    - "{{ tomcat_direcory }}/webapps/manager"
+    - "{{ tomcat_direcory }}/webapps/ROOT"
+  no_log: false
 
 - name: Create directory for tomcat
   file:
-    path: "{{ tomcat_install_path }}/apache-tomcat-{{ tomcat_version }}/webapps/ROOT"
+    path: "{{ tomcat_direcory }}/webapps/ROOT"
     state: directory
 
 - name: Creating a tomcat log folder in /var/log directory
@@ -54,4 +54,3 @@
     state: directory
     owner: "{{ tomcat_user }}"
     group: "{{ tomcat_group }}"
-

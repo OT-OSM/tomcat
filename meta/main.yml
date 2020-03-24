@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: ROHIT BANSAL
-  role_name: opstree_devops.tomcat
+  role_name: tomcat
   description: This role install tomcat version 7.0, 8.0, 8.5.
   company: OPSTREE SOLUTIONS
 
@@ -24,4 +24,4 @@ galaxy_info:
     - tomcat
 
 dependencies:
-  - java
+  - opstree_devops.java

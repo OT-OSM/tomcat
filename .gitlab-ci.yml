@@ -12,8 +12,7 @@ before_script:
   - docker info
   - python3 --version
   - python3 -m pip install ansible molecule[docker]
-  - pip install pytest
-  - pip install testinfra
+  - python3 -m pip install pytest testinfra
   - ansible --version
   - molecule --version
 

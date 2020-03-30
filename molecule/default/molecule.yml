@@ -41,7 +41,6 @@ scenario:
     - cleanup
     - destroy
     - dependency
-    - syntax
     - create
     - prepare
     - converge

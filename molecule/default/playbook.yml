@@ -3,5 +3,4 @@
   hosts: all
   become: true
   roles:
-    - oosm.osm_java
     - osm_tomcat

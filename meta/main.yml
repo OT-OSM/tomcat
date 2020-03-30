@@ -23,5 +23,4 @@ galaxy_info:
   galaxy_tags:
     - tomcat
 
-dependencies:
-  - opstree_devops.java
+dependencies: []

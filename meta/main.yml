@@ -24,4 +24,4 @@ galaxy_info:
     - tomcat
 
 dependencies:
-  - { role: java, src:git+https://github.com/OT-OSM/java.git }
+  - opstree_devops.java
